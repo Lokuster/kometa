@@ -1,0 +1,65 @@
+spring:
+  application:
+    name: operation-service
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017
+      database: operation-service
+  jpa:
+    show-sql: true
+    open-in-view: false
+    defer-datasource-initialization: true
+    hibernate:
+      ddl-auto: create
+  jackson.visibility:
+    field: any
+    getter: none
+    setter: none
+    is-getter: none
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka:password@localhost:8761/eureka
+server:
+  port: 0
+
+  servlet:
+    encoding:
+      charset: UTF-8 # Charset of HTTP requests and responses. Added to the "Content-Type" header if not set explicitly
+      enabled: true # Enable http encoding support
+      force: true
+
+logging:
+  level:
+    root: WARN
+    com.lokuster.operationservice: DEBUG
+    org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver: DEBUG
+    org.springframework.data.mongodb.core.MongoTemplate: DEBUG
+  pattern:
+    level: '%5p [${spring.application.name:},%X{traceId:-},%X{spanId:-}]'
+
+#Resilience4j Properties
+resilience4j:
+  circuitbreaker:
+    instances:
+      operation:
+        register-health-indicator: true
+        event-consumer-buffer-size: 10
+        sliding-window-type: COUNT_BASED
+        sliding-window-size: 5
+        failure-rate-threshold: 50
+        wait-duration-in-open-state: 5s
+        permitted-number-of-calls-in-half-open-state: 3
+        automatic-transition-from-open-to-half-open-enabled: true
+  #Resilience4j Timeout Properties
+  timelimiter:
+    instances:
+      operation:
+        timeout-duration: 3s
+  #Resilience4j Retry Properties
+  retry:
+    instances:
+      operation:
+        max-attempts: 3
+        wait-duration: 5s
