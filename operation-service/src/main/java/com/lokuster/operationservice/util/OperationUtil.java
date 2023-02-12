@@ -82,4 +82,8 @@ public class OperationUtil {
     public static LocalDate atMaxDateOrMaxValue(LocalDate maxDate) {
         return maxDate != null ? maxDate : MAX_DATE;
     }
+
+    public static String atRegexOrAnyRegex(String regex) {
+        return regex != null ? regex : ".*";
+    }
 }

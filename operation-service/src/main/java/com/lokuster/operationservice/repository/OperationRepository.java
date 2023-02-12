@@ -12,7 +12,10 @@ import java.util.List;
 public interface OperationRepository extends MongoRepository<Operation, String> {
     @Query("{" +
             "'sum' : {'$gte' : ?0, '$lte' : ?1}, " +
-            "'_date' : {'$gte' : ?2, '$lte': ?3}" +
+            "'_date' : {'$gte' : ?2, '$lte': ?3}," +
+            "'_client._name' : {'$regex': ?4}," +
+            "'_name._name' : {'$regex': ?5}" +
             "}")
-    List<Operation> findAllFiltered(Double minSum, Double maxSum, LocalDate minDate, LocalDate maxDate);
+    List<Operation> findAllFiltered(Double minSum, Double maxSum, LocalDate minDate,
+                                    LocalDate maxDate, String clientName, String name);
 }

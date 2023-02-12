@@ -1,7 +1,6 @@
 package com.lokuster.operationservice.dto;
 
 import com.lokuster.operationservice.HasId;
-import com.lokuster.operationservice.util.validation.NoHtml;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,8 +10,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OperationClientRequest implements HasId {
+public class OperationNameResponse implements HasId {
     String id;
-    @NoHtml
     String name;
 }

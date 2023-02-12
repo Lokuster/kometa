@@ -19,9 +19,7 @@ spring:
         - id: operation-service
           uri: lb://operation-service
           predicates:
-            - Path=/api/operations/**
-            - Path=/api/operation-names/**
-            - Path=/api/operation-clients/**
+            - Path=/api/operations/**,/api/operation-names/**,/api/operation-clients/**
         ## Discovery Service Route
         - id: discovery-service
           uri: http://localhost:8761

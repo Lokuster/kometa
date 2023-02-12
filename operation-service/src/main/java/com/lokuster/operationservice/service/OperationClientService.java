@@ -36,4 +36,17 @@ public class OperationClientService {
     public List<OperationClientResponse> getAll() {
         return asResponse(repository.findAll());
     }
+
+    public ResponseEntity<OperationClientResponse> get(String id, HttpServletRequest request) {
+        OperationClient operationClient = repository.findById(id).orElse(null);
+        if (operationClient == null) {
+            return null;
+        }
+        return asResponseEntity(asResponse(operationClient), request);
+    }
+
+    public ResponseEntity<OperationClient> save(OperationClientRequest operation, HttpServletRequest request) {
+        OperationClient updated = repository.save(fromRequest(operation));
+        return asResponseEntity(updated, request);
+    }
 }

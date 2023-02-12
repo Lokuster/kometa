@@ -25,12 +25,15 @@ public class OperationService {
     private final OperationNameRepository nameRepository;
     private final OperationClientRepository clientRepository;
 
-    public List<OperationResponse> getAll(Double minSum, Double maxSum, LocalDate minDate, LocalDate maxDate) {
+    public List<OperationResponse> getAll(Double minSum, Double maxSum, LocalDate minDate,
+                                          LocalDate maxDate, String clientName, String name) {
         return asResponse(repository.findAllFiltered(
                 atMinSumOrZero(minSum),
                 atMaxSumOrMaxValue(maxSum),
                 atMinDateOrMinValue(minDate),
-                atMaxDateOrMaxValue(maxDate)
+                atMaxDateOrMaxValue(maxDate),
+                atRegexOrAnyRegex(clientName),
+                atRegexOrAnyRegex(name)
         ));
     }
 

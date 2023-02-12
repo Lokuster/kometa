@@ -39,9 +39,11 @@ public class OperationController {
     public CompletableFuture<List<OperationResponse>> getAll(@RequestParam(name = "minSum", required = false) @Nullable Double minSum,
                                                              @RequestParam(name = "maxSum", required = false) @Nullable Double maxSum,
                                                              @RequestParam(name = "minDate", required = false) @Nullable LocalDate minDate,
-                                                             @RequestParam(name = "maxDate", required = false) @Nullable LocalDate maxDate) {
+                                                             @RequestParam(name = "maxDate", required = false) @Nullable LocalDate maxDate,
+                                                             @RequestParam(name = "clientName", required = false) @Nullable String clientName,
+                                                             @RequestParam(name = "name", required = false) @Nullable String name) {
         log.info("operation getAll");
-        return CompletableFuture.supplyAsync(() -> service.getAll(minSum, maxSum, minDate, maxDate));
+        return CompletableFuture.supplyAsync(() -> service.getAll(minSum, maxSum, minDate, maxDate, clientName, name));
     }
 
     @GetMapping("/{id}")

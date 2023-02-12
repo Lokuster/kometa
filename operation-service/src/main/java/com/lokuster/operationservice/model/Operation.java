@@ -1,5 +1,6 @@
 package com.lokuster.operationservice.model;
 
+import com.lokuster.operationservice.util.validation.NoHtml;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
@@ -21,6 +22,7 @@ public class Operation extends BaseEntity {
     private LocalDate date;
     @NotNull
     @NotBlank
+    @NoHtml
     @Field(value = "_document")
     private String document;
     @Field(value = "_client")
@@ -36,6 +38,7 @@ public class Operation extends BaseEntity {
     @Positive
     private Double sum;
     @Range(max = 256)
+    @NoHtml
     private String description;
 
     @Builder
